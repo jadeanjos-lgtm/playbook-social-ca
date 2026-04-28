@@ -273,6 +273,8 @@ function SlideWeekDistribution() {
   const setSlot = (di, pi) => {
     setW(prev => prev.map((d, i) => {
       if (i !== di) return d;
+      const daySum = d.posts.reduce((a, s) => a + s, 0);
+      if (daySum >= 7) return d; // dia travado — recusa qualquer mudança
       const otherSum = d.posts.reduce((a, s, j) => j !== pi ? a + s : a, 0);
       const order = [1, 3, 5];
       const currentIdx = order.indexOf(d.posts[pi]);
