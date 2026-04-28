@@ -273,18 +273,9 @@ function SlideWeekDistribution() {
   const setSlot = (di, pi) => {
     setW(prev => prev.map((d, i) => {
       if (i !== di) return d;
-      const daySum = d.posts.reduce((a, s) => a + s, 0);
-      if (daySum >= 7) return d; // dia travado — recusa qualquer mudança
-      const otherSum = d.posts.reduce((a, s, j) => j !== pi ? a + s : a, 0);
-      const order = [1, 3, 5];
-      const currentIdx = order.indexOf(d.posts[pi]);
-      for (let k = 1; k <= order.length; k++) {
-        const candidate = order[(currentIdx + k) % order.length];
-        if (otherSum + candidate <= 7) {
-          return { ...d, posts: d.posts.map((s, j) => j !== pi ? s : candidate) };
-        }
-      }
-      return d;
+      const current = d.posts[pi];
+      const next = current === 1 ? 3 : current === 3 ? 5 : 1;
+      return { ...d, posts: d.posts.map((s, j) => j !== pi ? s : next) };
     }));
   };
   const reset = () => setW(initial);
@@ -315,36 +306,33 @@ function SlideWeekDistribution() {
         <div style={{ marginTop: 56, display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 20 }}>
           {W.map((d, di) => {
             const daySum = d.posts.reduce((a, s) => a + s, 0);
-            const locked = daySum >= 7;
+            const over = daySum > 7;
             return (
             <div key={d.day} style={{
-              background: locked ? '#F0F7FF' : CA.white,
-              border: `1px solid ${locked ? CA.blue : CA.border}`,
+              background: over ? '#FFF1F0' : CA.white,
+              border: `2px solid ${over ? CA.red : CA.border}`,
               borderRadius: 16,
               padding: 24, display: 'flex', flexDirection: 'column', gap: 16,
               transition: 'border-color 0.2s ease, background 0.2s ease',
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <div style={{ fontFamily: 'Raleway', fontWeight: 800, fontSize: 32, letterSpacing: -0.8, color: CA.fg }}>{d.day}</div>
-                {locked
-                  ? <div style={{ fontFamily: 'Ping Pong', fontWeight: 700, fontSize: 13, letterSpacing: 1.5, textTransform: 'uppercase', color: CA.blue, background: CA.blueLighter, padding: '3px 10px', borderRadius: 900 }}>🔒 7 pts</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ fontFamily: 'Raleway', fontWeight: 800, fontSize: 32, letterSpacing: -0.8, color: over ? CA.red : CA.fg }}>{d.day}</div>
+                {over
+                  ? <div style={{ fontFamily: 'Ping Pong', fontWeight: 700, fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: CA.red, background: '#FFE1DD', padding: '4px 10px', borderRadius: 900 }}>⚠ {daySum} pts</div>
                   : <div style={{ fontFamily: 'Ping Pong', fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: CA.n400 }}>{d.date}</div>
                 }
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {d.posts.map((s, idx) => (
-                  <button key={idx} disabled={locked} onClick={() => setSlot(di, idx)} style={{
-                    appearance: 'none', WebkitAppearance: 'none', border: 'none',
-                    cursor: locked ? 'not-allowed' : 'pointer',
+                  <button key={idx} onClick={() => setSlot(di, idx)} style={{
+                    appearance: 'none', WebkitAppearance: 'none', border: 'none', cursor: 'pointer',
                     background: colorFor(s), color: CA.white, borderRadius: 10,
                     padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     fontFamily: 'Ping Pong', textAlign: 'left',
-                    boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.18)',
-                    opacity: locked ? 0.6 : 1,
-                    pointerEvents: locked ? 'none' : 'auto',
-                    transition: 'opacity 0.2s ease, transform 0.08s ease',
+                    boxShadow: over ? `inset 0 0 0 2px ${CA.red}` : 'inset 0 0 0 1px rgba(255,255,255,0.18)',
+                    transition: 'transform 0.08s ease',
                   }}
-                  onMouseDown={e => { if (!locked) e.currentTarget.style.transform='scale(0.97)'; }}
+                  onMouseDown={e => e.currentTarget.style.transform='scale(0.97)'}
                   onMouseUp={e => e.currentTarget.style.transform=''}
                   onMouseLeave={e => e.currentTarget.style.transform=''}>
                     <div style={{ fontWeight: 700, fontSize: 18 }}>{idx === 0 ? '08:30' : idx === 1 ? '12:30' : '17:30'}</div>
