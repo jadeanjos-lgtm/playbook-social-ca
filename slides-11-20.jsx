@@ -271,9 +271,18 @@ function SlideWeekDistribution() {
   const cycle = s => s === 1 ? 3 : s === 3 ? 5 : 1;
 
   const setSlot = (di, pi) => {
-    setW(prev => prev.map((d, i) => i !== di ? d : {
-      ...d,
-      posts: d.posts.map((s, j) => j !== pi ? s : cycle(s)),
+    setW(prev => prev.map((d, i) => {
+      if (i !== di) return d;
+      const otherSum = d.posts.reduce((a, s, j) => j !== pi ? a + s : a, 0);
+      const order = [1, 3, 5];
+      const currentIdx = order.indexOf(d.posts[pi]);
+      for (let k = 1; k <= order.length; k++) {
+        const candidate = order[(currentIdx + k) % order.length];
+        if (otherSum + candidate <= 15) {
+          return { ...d, posts: d.posts.map((s, j) => j !== pi ? s : candidate) };
+        }
+      }
+      return d;
     }));
   };
   const reset = () => setW(initial);
