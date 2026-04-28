@@ -278,7 +278,7 @@ function SlideWeekDistribution() {
       const currentIdx = order.indexOf(d.posts[pi]);
       for (let k = 1; k <= order.length; k++) {
         const candidate = order[(currentIdx + k) % order.length];
-        if (otherSum + candidate <= 15) {
+        if (otherSum + candidate <= 7) {
           return { ...d, posts: d.posts.map((s, j) => j !== pi ? s : candidate) };
         }
       }
