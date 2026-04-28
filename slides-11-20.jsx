@@ -311,26 +311,37 @@ function SlideWeekDistribution() {
         </h1>
 
         <div style={{ marginTop: 56, display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 20 }}>
-          {W.map((d, di) => (
+          {W.map((d, di) => {
+            const daySum = d.posts.reduce((a, s) => a + s, 0);
+            const locked = daySum >= 7;
+            return (
             <div key={d.day} style={{
-              background: CA.white, border: `1px solid ${CA.border}`, borderRadius: 16,
+              background: locked ? '#F0F7FF' : CA.white,
+              border: `1px solid ${locked ? CA.blue : CA.border}`,
+              borderRadius: 16,
               padding: 24, display: 'flex', flexDirection: 'column', gap: 16,
+              transition: 'border-color 0.2s ease, background 0.2s ease',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <div style={{ fontFamily: 'Raleway', fontWeight: 800, fontSize: 32, letterSpacing: -0.8, color: CA.fg }}>{d.day}</div>
-                <div style={{ fontFamily: 'Ping Pong', fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: CA.n400 }}>{d.date}</div>
+                {locked
+                  ? <div style={{ fontFamily: 'Ping Pong', fontWeight: 700, fontSize: 13, letterSpacing: 1.5, textTransform: 'uppercase', color: CA.blue, background: CA.blueLighter, padding: '3px 10px', borderRadius: 900 }}>🔒 7 pts</div>
+                  : <div style={{ fontFamily: 'Ping Pong', fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: CA.n400 }}>{d.date}</div>
+                }
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {d.posts.map((s, idx) => (
-                  <button key={idx} onClick={() => setSlot(di, idx)} style={{
-                    appearance: 'none', WebkitAppearance: 'none', border: 'none', cursor: 'pointer',
+                  <button key={idx} onClick={() => !locked && setSlot(di, idx)} style={{
+                    appearance: 'none', WebkitAppearance: 'none', border: 'none',
+                    cursor: locked ? 'not-allowed' : 'pointer',
                     background: colorFor(s), color: CA.white, borderRadius: 10,
                     padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     fontFamily: 'Ping Pong', textAlign: 'left',
                     boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.18)',
-                    transition: 'transform 0.08s ease',
+                    opacity: locked ? 0.7 : 1,
+                    transition: 'opacity 0.2s ease, transform 0.08s ease',
                   }}
-                  onMouseDown={e => e.currentTarget.style.transform='scale(0.97)'}
+                  onMouseDown={e => { if (!locked) e.currentTarget.style.transform='scale(0.97)'; }}
                   onMouseUp={e => e.currentTarget.style.transform=''}
                   onMouseLeave={e => e.currentTarget.style.transform=''}>
                     <div style={{ fontWeight: 700, fontSize: 18 }}>{idx === 0 ? '08:30' : idx === 1 ? '12:30' : '17:30'}</div>
@@ -339,7 +350,8 @@ function SlideWeekDistribution() {
                 ))}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Live totals + capacity status */}
