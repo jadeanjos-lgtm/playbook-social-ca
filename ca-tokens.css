@@ -1,0 +1,288 @@
+/* =====================================================================
+   Conta Azul — Colors & Type Foundation
+   Source: andre-rocha-ca/martech-design-system (Figma SITE_ContaAZUL)
+   ===================================================================== */
+
+/* Raleway (display) — Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;800&display=swap');
+
+/* Ping Pong — Conta Azul's proprietary humanist geometric sans.
+   Brand font files served locally from /fonts. */
+@font-face { font-family: 'Ping Pong'; font-style: normal; font-weight: 100; font-display: swap;
+  src: url('fonts/PingPong-Thin.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: italic; font-weight: 100; font-display: swap;
+  src: url('fonts/PingPong-ThinItalic.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: normal; font-weight: 300; font-display: swap;
+  src: url('fonts/PingPong-Light.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: italic; font-weight: 300; font-display: swap;
+  src: url('fonts/PingPong-LightItalic.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('fonts/PingPong-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('fonts/PingPong-Italic.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: normal; font-weight: 500; font-display: swap;
+  src: url('fonts/PingPong-Medium.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: italic; font-weight: 500; font-display: swap;
+  src: url('fonts/PingPong-MediumItalic.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: normal; font-weight: 800; font-display: swap;
+  src: url('fonts/PingPong-XBold.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: italic; font-weight: 800; font-display: swap;
+  src: url('fonts/PingPong-XBoldItalic.ttf') format('truetype'); }
+@font-face { font-family: 'Ping Pong'; font-style: normal; font-weight: 900; font-display: swap;
+  src: url('fonts/PingPong-Black.ttf') format('truetype'); }
+
+:root {
+  /* =============================== COLOR ============================= */
+
+  /* Brand — Azul Céu Aberto (base) */
+  --ca-blue-base:         #2687E9;   /* primary trust color */
+  --ca-blue-light:        #5AADF1;   /* hover */
+  --ca-blue-semi-dark:    #1B69C8;   /* active / outline strokes */
+  --ca-blue-lighter:      #D3F1FD;   /* tints */
+  --ca-blue-hero-dark:    #07266F;   /* hero backgrounds */
+  --ca-blue-info:         #00AFF0;   /* pricing card CTA */
+
+  /* Brand — Azul Profundo (Parceiro / Conta Azul Mais) */
+  --ca-deep-blue:         #00084F;
+  --ca-deep-blue-light:   #1B2A6B;
+  --ca-deep-blue-dark:    #000336;
+
+  /* CTA — Amarelo Amanhecer */
+  --ca-yellow-base:       #F9BD1D;   /* primary action */
+  --ca-yellow-hover:      #FFCA3D;
+  --ca-yellow-active:     #F0A700;
+  --ca-gold:              #FFB600;   /* parceiro secondary */
+
+  /* Green — support / success */
+  --ca-green-whatsapp:    #55D266;
+  --ca-green-semi-dark:   #1B9B45;
+  --ca-green-darker:      #075638;
+  --ca-green-light:       #7AE87E;
+  --ca-green-lighter:     #D9FBD3;
+
+  /* Red — required / strikethrough only */
+  --ca-red-semi-dark:     #DB242A;
+  --ca-red-dark:          #B7192B;
+  --ca-red-destructive:   #FF3D32;
+
+  /* Text */
+  --fg-primary:           #20262B;   /* default dark text */
+  --fg-secondary:         #35414B;   /* body paragraphs */
+  --fg-muted:             #595959;   /* testimonials, captions */
+  --fg-dark:              #333333;   /* form labels */
+  --fg-on-dark:           #FFFFFF;
+
+  /* Neutrals */
+  --neutral-white:        #FFFFFF;
+  --neutral-50:           #F8F9FA;
+  --neutral-100:          #F1F3F5;
+  --neutral-200:          #E9ECEF;
+  --neutral-300:          #DEE2E6;
+  --neutral-400:          #ADB5BD;
+  --neutral-500:          #6C757D;
+  --neutral-600:          #495057;
+  --neutral-700:          #343A40;
+  --neutral-800:          #20262B;
+  --neutral-900:          #141619;
+
+  /* Surfaces */
+  --bg-surface:           #F4F4F4;   /* grayscale-light */
+  --bg-light:             #EFF3F7;   /* feature gradients */
+
+  /* Borders */
+  --border-default:       #C9D3DD;
+  --border-light:          #CBCBCB;
+  --border-input:         #C1C3C7;
+
+  /* Semantic */
+  --color-success:        #33CC66;
+  --color-warning:        #F9BD1D;
+  --color-error:          #FF3D32;
+  --color-info:           #2687E9;
+
+  /* Gradients (hero) */
+  --gradient-hero:        linear-gradient(196.78deg, #205ED7 1.84%, #2687E9 37.96%, #00AFF0 95.1%);
+  --gradient-feature-bg:  linear-gradient(180deg, #EFF3F7 0%, #FFFFFF 100%);
+
+  /* Shadows */
+  --shadow-card-light:    0px 1.64px 24.6px 0px rgba(3, 78, 152, 0.18);
+  --shadow-card:          0px 2.4px 36px   0px rgba(3, 78, 152, 0.14);
+  --shadow-card-md:       0px 2.4px 67.4px 0px rgba(3, 78, 152, 0.18);
+  --shadow-card-lg:       0px 4px 60px    0px rgba(3, 78, 152, 0.18);
+  --shadow-card-xl:       0px 4px 60px    0px rgba(3, 78, 152, 0.22);
+
+  /* Radii */
+  --radius-sm:            0.125rem;   /* 2px */
+  --radius-md:            0.25rem;    /* 4px — inputs, badges */
+  --radius-container:     0.875rem;   /* 14px */
+  --radius-lg:            0.5rem;     /* 8px */
+  --radius-xl:            0.75rem;
+  --radius-2xl:           1rem;
+  --radius-3xl:           1.5rem;
+  --radius-4xl:           2.5rem;     /* 40px — card tops */
+  --radius-5xl:           3.75rem;    /* 60px — CTA pill */
+  --radius-card-br:       5rem;       /* 80px — card bottom-right */
+  --radius-image-bl:      8.5rem;     /* 136px — feature image */
+  --radius-section:       5rem;       /* 80px — section bottom corners */
+  --radius-pill:          900px;      /* pills / tags */
+  --radius-full:          9999px;
+
+  /* Spacing scale (rem) — derived from Figma ladder */
+  --sp-0:  0;
+  --sp-1:  0.25rem; /* 4  */
+  --sp-2:  0.5rem;  /* 8  */
+  --sp-3:  0.75rem; /* 12 */
+  --sp-4:  1rem;    /* 16 */
+  --sp-5:  1.25rem; /* 20 */
+  --sp-6:  1.5rem;  /* 24 */
+  --sp-8:  2rem;    /* 32 */
+  --sp-10: 2.5rem;  /* 40 */
+  --sp-12: 3rem;    /* 48 */
+  --sp-15: 3.75rem; /* 60 */
+  --sp-16: 4rem;    /* 64 */
+  --sp-20: 5rem;    /* 80 */
+  --sp-24: 6rem;    /* 96 */
+  --sp-34: 8.5rem;  /* 136 */
+
+  /* Layout */
+  --page-max:            1800px;
+  --content-max:         1296px;
+  --content-feature:     1217px;
+
+  /* =============================== TYPE ============================== */
+  --font-display:  'Raleway', system-ui, sans-serif;
+  --font-body:     'Ping Pong', system-ui, sans-serif;
+
+  /* Semantic sizing — mobile-first but desktop values favoured since the
+     extracted Figma was desktop 1800px */
+  --fs-hero:       48px;   --lh-hero:  56px;   --ls-hero:  -1.44px;
+  --fs-h1:         40px;   --lh-h1:    48px;   --ls-h1:    -1.2px;
+  --fs-h2:         32px;   --lh-h2:    40px;   --ls-h2:    -1.0px;
+  --fs-h3:         24px;   --lh-h3:    32px;   --ls-h3:    -0.72px;
+  --fs-h4:         20px;   --lh-h4:    28px;   --ls-h4:    -0.6px;
+  --fs-h5:         18px;   --lh-h5:    26px;   --ls-h5:    -0.3px;
+  --fs-body-lg:    18px;   --lh-body-lg: 28px;
+  --fs-body-md:    16px;   --lh-body-md: 24px;
+  --fs-body-sm:    14px;   --lh-body-sm: 20px;
+  --fs-body-xs:    12px;   --lh-body-xs: 18px;
+  --fs-label:      12px;   --lh-label:   18px;   --ls-label: 1px;
+}
+
+/* ==================== SEMANTIC TYPE ROLES ============================ */
+
+.ca-hero-headline {
+  font-family: var(--font-display);
+  font-weight: 300; /* Light — paired with ExtraBold inline */
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  color: var(--fg-on-dark);
+}
+.ca-hero-headline strong,
+.ca-hero-headline .bold {
+  font-weight: 800;
+}
+
+.ca-section-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  color: var(--fg-primary);
+  text-wrap: pretty;
+}
+.ca-section-title strong { font-weight: 800; color: var(--ca-blue-base); }
+
+.ca-subsection-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
+  letter-spacing: var(--ls-h4);
+  color: var(--fg-dark);
+}
+
+.ca-card-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: -2px;
+  color: var(--ca-blue-base);
+}
+
+.ca-stat-number {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: -0.48px;
+  color: var(--ca-blue-base);
+}
+
+.ca-price-large {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -2px;
+  color: var(--fg-primary);
+}
+.ca-price-suffix {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--fg-primary);
+}
+
+.ca-body-lg       { font-family: var(--font-body); font-weight: 400;
+                    font-size: var(--fs-body-lg); line-height: var(--lh-body-lg);
+                    color: var(--fg-secondary); }
+.ca-body-lg-bold  { font-family: var(--font-body); font-weight: 700;
+                    font-size: var(--fs-body-lg); line-height: var(--lh-body-lg);
+                    color: var(--fg-secondary); }
+.ca-body-md       { font-family: var(--font-body); font-weight: 400;
+                    font-size: var(--fs-body-md); line-height: var(--lh-body-md);
+                    color: var(--fg-secondary); }
+.ca-body-md-bold  { font-family: var(--font-body); font-weight: 700;
+                    font-size: var(--fs-body-md); line-height: var(--lh-body-md);
+                    color: var(--fg-primary); }
+.ca-body-sm       { font-family: var(--font-body); font-weight: 400;
+                    font-size: var(--fs-body-sm); line-height: var(--lh-body-sm);
+                    color: var(--fg-muted); }
+.ca-body-xs       { font-family: var(--font-body); font-weight: 400;
+                    font-size: var(--fs-body-xs); line-height: var(--lh-body-xs);
+                    color: var(--fg-muted); }
+
+.ca-label-uppercase {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+}
+
+.ca-cta-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.18px;
+}
+.ca-cta-text-blue {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ca-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--ca-blue-base);
+  text-decoration: underline;
+}
