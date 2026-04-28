@@ -331,14 +331,15 @@ function SlideWeekDistribution() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {d.posts.map((s, idx) => (
-                  <button key={idx} onClick={() => !locked && setSlot(di, idx)} style={{
+                  <button key={idx} disabled={locked} onClick={() => setSlot(di, idx)} style={{
                     appearance: 'none', WebkitAppearance: 'none', border: 'none',
                     cursor: locked ? 'not-allowed' : 'pointer',
                     background: colorFor(s), color: CA.white, borderRadius: 10,
                     padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     fontFamily: 'Ping Pong', textAlign: 'left',
                     boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.18)',
-                    opacity: locked ? 0.7 : 1,
+                    opacity: locked ? 0.6 : 1,
+                    pointerEvents: locked ? 'none' : 'auto',
                     transition: 'opacity 0.2s ease, transform 0.08s ease',
                   }}
                   onMouseDown={e => { if (!locked) e.currentTarget.style.transform='scale(0.97)'; }}
